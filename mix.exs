@@ -56,7 +56,7 @@ defmodule FontMetrics.MixProject do
       name: @app_name,
       contributors: ["Boyd Multerer"],
       maintainers: ["Boyd Multerer", "Scenic Core Team"],
-      licenses: ["Apache 2"],
+      licenses: ["Apache-2.0"],
       links: %{Github: @github}
     ]
   end
