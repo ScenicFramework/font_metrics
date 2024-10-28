@@ -35,21 +35,21 @@ defmodule FontMetricsTest do
 
   test "supported? checks single characters" do
     assert FontMetrics.supported?(32, @roboto_metrics)
-    assert FontMetrics.supported?('A', @roboto_metrics)
+    assert FontMetrics.supported?(~c"A", @roboto_metrics)
     assert FontMetrics.supported?("A", @roboto_metrics)
-    assert FontMetrics.supported?('A', @bitter_metrics)
+    assert FontMetrics.supported?(~c"A", @bitter_metrics)
 
     refute FontMetrics.supported?(25324, @roboto_metrics)
-    refute FontMetrics.supported?('括', @roboto_metrics)
+    refute FontMetrics.supported?(~c"括", @roboto_metrics)
     refute FontMetrics.supported?("括", @roboto_metrics)
     refute FontMetrics.supported?("括", @bitter_metrics)
   end
 
   test "supported? checks multiple characters" do
     assert FontMetrics.supported?("Multiple Characters.", @roboto_metrics)
-    assert FontMetrics.supported?('Multiple Characters.', @roboto_metrics)
+    assert FontMetrics.supported?(~c"Multiple Characters.", @roboto_metrics)
 
-    refute FontMetrics.supported?('Multiple Characters 括', @roboto_metrics)
+    refute FontMetrics.supported?(~c"Multiple Characters 括", @roboto_metrics)
   end
 
   # ============================================================================
@@ -121,7 +121,7 @@ defmodule FontMetricsTest do
         @roboto_metrics.metrics[98] + @roboto_metrics.metrics[99]
 
     assert FontMetrics.width("abc", nil, @roboto_metrics) == raw_value
-    assert FontMetrics.width('abc', nil, @roboto_metrics) == raw_value
+    assert FontMetrics.width(~c"abc", nil, @roboto_metrics) == raw_value
     assert FontMetrics.width(97, nil, @roboto_metrics) == @roboto_metrics.metrics[97]
   end
 
@@ -132,7 +132,7 @@ defmodule FontMetricsTest do
     scale = 22 / metrics.units_per_em
 
     assert FontMetrics.width("abc", 22, metrics) == raw_value * scale
-    assert FontMetrics.width('abc', 22, metrics) == raw_value * scale
+    assert FontMetrics.width(~c"abc", 22, metrics) == raw_value * scale
     assert FontMetrics.width(97, 22, metrics) == metrics.metrics[97] * scale
   end
 
