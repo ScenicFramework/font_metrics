@@ -3,10 +3,10 @@ defmodule FontMetrics.MixProject do
 
   @app_name :font_metrics
 
-  @version "0.5.1"
+  @version "0.5.2"
 
   @elixir_version "~> 1.9"
-  @github "https://github.com/boydm/font_metrics"
+  @github "https://github.com/ScenicFramework/font_metrics"
 
   def project do
     [
@@ -55,7 +55,7 @@ defmodule FontMetrics.MixProject do
     [
       name: @app_name,
       contributors: ["Boyd Multerer"],
-      maintainers: ["Boyd Multerer"],
+      maintainers: ["Boyd Multerer", "Scenic Core Team"],
       licenses: ["Apache 2"],
       links: %{Github: @github}
     ]
@@ -71,7 +71,7 @@ defmodule FontMetrics.MixProject do
     [
       main: "FontMetrics",
       source_ref: "v#{@version}",
-      source_url: "https://github.com/boydm/font_metrics"
+      source_url: @github
     ]
   end
 end
