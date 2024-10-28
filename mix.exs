@@ -42,6 +42,7 @@ defmodule FontMetrics.MixProject do
   defp deps do
     [
       {:nimble_options, "~> 0.3 or ~> 0.4 or ~> 0.5 or ~> 1.0"},
+      # Dev and test deps
       {:ex_doc, ">= 0.0.0", only: :dev},
       {:excoveralls, ">= 0.0.0", only: :test, runtime: false},
       {:credo, ">= 0.0.0", only: [:dev, :test], runtime: false},
