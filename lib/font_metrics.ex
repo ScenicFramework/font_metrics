@@ -193,7 +193,7 @@ defmodule FontMetrics do
   def width(source, pixels, font_metrics, opts \\ [])
 
   def width("", _, _, _), do: 0
-  def width('', _, _, _), do: 0
+  def width(~c"", _, _, _), do: 0
 
   def width(
         source,
@@ -328,8 +328,8 @@ defmodule FontMetrics do
       opts[:kern]
     )
     |> case do
-      '' ->
-        ''
+      ~c"" ->
+        ~c""
 
       out ->
         case Enum.reverse(out) do
@@ -349,7 +349,7 @@ defmodule FontMetrics do
     |> Enum.join("\n")
   end
 
-  defp do_shorten(_, max_width, _, _, _) when max_width <= 0, do: ''
+  defp do_shorten(_, max_width, _, _, _) when max_width <= 0, do: ~c""
 
   # various ways to structure the code. This attempts to reuse calculations and
   # and keep it to a single pass as much as possible
@@ -388,8 +388,8 @@ defmodule FontMetrics do
     do_kern_shorten(source, max, cp_metrics, kerning)
   end
 
-  defp do_kern_shorten(codepoints, max, cp_metrics, kerning, k_next \\ 0, width \\ 0, out \\ '')
-  defp do_kern_shorten('', _, _, _, _, _, out), do: out
+  defp do_kern_shorten(codepoints, max, cp_metrics, kerning, k_next \\ 0, width \\ 0, out \\ ~c"")
+  defp do_kern_shorten(~c"", _, _, _, _, _, out), do: out
 
   defp do_kern_shorten([last_cp], max, cp_metrics, _, k_next, width, out) do
     adv = cp_metrics[last_cp] || cp_metrics[0]
@@ -518,7 +518,7 @@ defmodule FontMetrics do
   # by this point, it should only be one line
   defp do_nearest_gap(line, x, cp_metrics, kerning, kern, k_next \\ 0, width \\ 0, n \\ 0)
   defp do_nearest_gap(_, x, _, _, _, _, _, _) when x <= 0, do: {0, 0}
-  defp do_nearest_gap('', _, _, _, _, _, w, n), do: {n, w}
+  defp do_nearest_gap(~c"", _, _, _, _, _, w, n), do: {n, w}
 
   # non-kerned gap finder
   defp do_nearest_gap([cp | cps], x, cp_metrics, kerning, kern, k_next, width, n) do
@@ -602,7 +602,7 @@ defmodule FontMetrics do
 
   defp do_position_at(line, n, cp_metrics, kerning, kern, k_next \\ 0, line_no \\ 0, width \\ 0)
 
-  defp do_position_at('', _, _, _, _, _, line_no, width), do: {width, line_no}
+  defp do_position_at(~c"", _, _, _, _, _, line_no, width), do: {width, line_no}
   defp do_position_at(_, -1, _, _, _, _, line_no, width), do: {width, line_no}
 
   # handle newlines
